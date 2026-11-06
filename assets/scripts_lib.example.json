@@ -1,0 +1,131 @@
+{
+  "version": "2.0",
+  "_note": "这是字段演示，不是内容模板。所有取值都可以改；config 里的规则换成你自己的即可，代码不含任何形态或行业预设。",
+
+  "config": {
+    "structure": {
+      "segment_seconds": 2.0,
+      "shot_count": 5,
+      "pattern": "PCPCP"
+    },
+    "speech": {
+      "rate": 3.6,
+      "max_text_ratio": 1900,
+      "slot_slack": 1.35
+    },
+    "compliance": {
+      "banned": [],
+      "case_sensitive": [],
+      "required_context": [],
+      "max_hashtags": 5,
+      "required_overlay": "",
+      "digit_note_keyword": ""
+    },
+    "render": {
+      "canvas": "1080×1920",
+      "accent_color": "#FACC15",
+      "card_bg": "竖向渐变 #0F172A → #1E293B，叠 4% 白细网格；安全区上下各留 220px（避开平台顶部与底部 UI）。",
+      "character_zh": "（在此填写人物与场景：人物年龄气质、服装、环境、光线、画幅。整片保持一致。无字幕，无水印。）",
+      "character_en": "(describe the person and scene here: age and presence, wardrobe, setting, lighting, aspect ratio. Keep identical across the whole video. No subtitles, no watermark.)",
+      "banned_tail": "合规词表中的禁用词",
+      "speech_lang": "越南语（vi-VN）",
+      "speech_lang_en": "Vietnamese (vi-VN)",
+      "voice": "男声，中低音，语速偏慢",
+      "voice_en": "male, low-mid register, unhurried"
+    },
+    "require_zh": true
+  },
+
+  "field_note": {
+    "config.structure.segment_seconds": "每镜基准秒数。槽位按「镜数 × 该值」估算。",
+    "config.structure.shot_count": "全片镜头数。留空则不校验结构。",
+    "config.structure.pattern": "人像(P)与卡片(C)的排列，如 PCPCP。留空则不校验排列。",
+    "config.speech.rate": "语速，音节/秒。按你的语言实测填，用来估口播时长。",
+    "config.speech.max_text_ratio": "单行字幕上限 = 该值 ÷ 字号。默认 1900 对应 1080 宽屏。",
+    "config.speech.slot_slack": "槽位允许超出的倍数，超出即提示会被赶。",
+    "config.compliance.banned": "禁用词数组。匹配前去音标，防变体规避。",
+    "config.compliance.case_sensitive": "需区分大小写的词（缩写类），原样匹配。",
+    "config.compliance.required_context": "语境词规则：{word, any_of, conflict_with, conflict_message, context_message}。word 出现且命中 conflict_with → 报错；出现但缺 any_of → 提醒。",
+    "config.compliance.max_hashtags": "标签数量上限。",
+    "config.compliance.required_overlay": "画面须常驻的标注文案，留空则不检查。",
+    "config.compliance.digit_note_keyword": "note_zh 里出现该词即视为已核实数字（如「待核实」），留空则只要口播有数字就提醒。",
+    "config.require_zh": "是否强制每条口播都有中文对照（zh_lines）。",
+    "l1_l2": "屏幕字幕。单行长度上限 = max_text_ratio ÷ size。卡片镜留空。",
+    "say1": "口播词，与字幕解耦：字幕能短，口播能自然。",
+    "voice_slot": "语音槽位 = 本镜 + 后续连续无文本镜。",
+    "move": "仅 in / out / in2 / out2，写别的会出错。",
+    "card.kind": "bigword / list / strike / check / compare",
+    "zh_lines": "逐句中文对照，与有 say1 的镜头一一对应（require_zh 开启时必填）。"
+  },
+
+  "scripts": [
+    {
+      "id": "S01",
+      "pillar": "示例支柱",
+      "type": "flow",
+      "topic_vi": "Ví dụ minh hoạ cấu trúc",
+      "topic_zh": "示例 · 结构演示",
+      "angle_zh": "开场 → 卡片 → 说明 → 卡片 → 收尾",
+      "segments": [
+        {
+          "img": "close",
+          "move": "in",
+          "l1": "Dòng phụ đề mẫu",
+          "l2": "",
+          "say1": "Đây là câu ví dụ thứ nhất.",
+          "size": 92
+        },
+        {
+          "card": {
+            "kind": "bigword",
+            "a": "TIÊU ĐỀ",
+            "b": "PHỤ ĐỀ"
+          },
+          "l1": "",
+          "size": 84
+        },
+        {
+          "img": "gest",
+          "move": "out",
+          "l1": "Nội dung của bạn",
+          "l2": "",
+          "say1": "Đây là câu ví dụ thứ hai.",
+          "size": 90
+        },
+        {
+          "card": {
+            "kind": "list",
+            "title": "MỤC LỤC",
+            "items": [
+              "MỤC A",
+              "MỤC B",
+              "MỤC C"
+            ]
+          },
+          "l1": "",
+          "size": 84
+        },
+        {
+          "img": "half",
+          "move": "in2",
+          "l1": "Kết thúc ví dụ",
+          "l2": "",
+          "say1": "Đây là câu ví dụ thứ ba.",
+          "size": 84
+        }
+      ],
+      "title": "Tiêu đề ví dụ",
+      "hashtags": [
+        "#vidu",
+        "#demo"
+      ],
+      "voiceover_vi": "Đây là câu ví dụ thứ nhất. Đây là câu ví dụ thứ hai. Đây là câu ví dụ thứ ba.",
+      "note_zh": "纯字段演示，整条替换成你自己的内容即可。",
+      "zh_lines": [
+        "这是第一句示例口播。",
+        "这是第二句示例口播。",
+        "这是第三句示例口播。"
+      ]
+    }
+  ]
+}

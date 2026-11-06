@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+*.log
+node_modules/
+
+# 本地输出
+交付/
+output/
+*.mp4
+*.wav
+*.mp3
+
+# 方法论与私有资产：仅本地保留，不随仓库分发
+SKILL.md
+references/
+assets/scripts_lib.*.json
+scripts/build_*.py
